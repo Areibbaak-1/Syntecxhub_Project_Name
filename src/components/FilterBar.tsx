@@ -17,10 +17,16 @@ const FilterBar: React.FC<FilterBarProps> = ({ activeCategory, onCategoryChange 
       transition={{ duration: 0.5, delay: 0.3 }}
       className="border-b border-border/50 p-4 lg:p-6"
     >
-      <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3 font-medium flex items-center gap-2">
+      {/* ✅ H3 equivalent heading for accessibility */}
+      <p
+        role="heading"
+        aria-level={3}
+        className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3 font-medium flex items-center gap-2"
+      >
         <Filter className="h-3.5 w-3.5 text-primary" />
         Filter
       </p>
+
       <div className="flex flex-wrap gap-2">
         <button
           onClick={() => onCategoryChange("")}
@@ -30,10 +36,16 @@ const FilterBar: React.FC<FilterBarProps> = ({ activeCategory, onCategoryChange 
               ? "text-primary-foreground border-transparent shadow-lg"
               : "bg-secondary/50 text-muted-foreground border-border/50 hover:text-foreground hover:border-border"
           )}
-          style={activeCategory === "" ? { background: 'var(--gradient-primary)', boxShadow: 'var(--shadow-glow)' } : undefined}
+          style={
+            activeCategory === ""
+              ? { background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }
+              : undefined
+          }
+          aria-pressed={activeCategory === ""}
         >
           All
         </button>
+
         {CATEGORIES.map((cat) => (
           <button
             key={cat}
@@ -44,7 +56,12 @@ const FilterBar: React.FC<FilterBarProps> = ({ activeCategory, onCategoryChange 
                 ? "text-primary-foreground border-transparent shadow-lg"
                 : "bg-secondary/50 text-muted-foreground border-border/50 hover:text-foreground hover:border-border"
             )}
-            style={activeCategory === cat ? { background: 'var(--gradient-primary)', boxShadow: 'var(--shadow-glow)' } : undefined}
+            style={
+              activeCategory === cat
+                ? { background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }
+                : undefined
+            }
+            aria-pressed={activeCategory === cat}
           >
             {cat}
           </button>
