@@ -34,20 +34,43 @@ const ExpenseSummary: React.FC<ExpenseSummaryProps> = ({ total, count }) => {
       transition={{ duration: 0.5, delay: 0.1 }}
       className="p-6 lg:p-8"
     >
-      <div className="rounded-2xl p-6 relative overflow-hidden" style={{ background: 'var(--gradient-surface)', boxShadow: 'var(--shadow-card)' }}>
+      <div
+        className="rounded-2xl p-6 relative overflow-hidden"
+        style={{
+          background: "var(--gradient-surface)",
+          boxShadow: "var(--shadow-card)",
+        }}
+      >
         {/* Decorative gradient orb */}
-        <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full opacity-20" style={{ background: 'var(--gradient-primary)', filter: 'blur(40px)' }} />
-        
+        <div
+          className="absolute -top-12 -right-12 w-32 h-32 rounded-full opacity-20"
+          style={{
+            background: "var(--gradient-primary)",
+            filter: "blur(40px)",
+          }}
+        />
+
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-xl bg-primary/15 flex items-center justify-center">
               <TrendingUp className="h-4 w-4 text-primary" />
             </div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium">
+
+            {/* ✅ H2 equivalent heading for accessibility */}
+            <p
+              className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium"
+              role="heading"
+              aria-level={2}
+            >
               Total Spent
             </p>
           </div>
-          <span className="flex items-center gap-1 text-xs font-medium text-accent bg-accent/10 px-2.5 py-1 rounded-full">
+
+          {/* ✅ aria-label for count entries */}
+          <span
+            className="flex items-center gap-1 text-xs font-medium text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+            aria-label={`${count} expense entries`}
+          >
             <ArrowUpRight className="h-3 w-3" />
             {count} entries
           </span>
@@ -61,13 +84,15 @@ const ExpenseSummary: React.FC<ExpenseSummaryProps> = ({ total, count }) => {
         <div className="mt-4 h-1 rounded-full bg-secondary overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: '65%' }}
-            transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
+            animate={{ width: "65%" }}
+            transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
             className="h-full rounded-full"
-            style={{ background: 'var(--gradient-primary)' }}
+            style={{ background: "var(--gradient-primary)" }}
           />
         </div>
-        <p className="text-xs text-muted-foreground mt-2">65% of monthly budget</p>
+        <p className="text-xs text-muted-foreground mt-2">
+          65% of monthly budget
+        </p>
       </div>
     </motion.div>
   );
