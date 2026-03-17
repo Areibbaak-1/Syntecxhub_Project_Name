@@ -63,14 +63,26 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAdd }) => {
       transition={{ duration: 0.5, delay: 0.2 }}
       className="p-6 lg:p-8"
     >
-      <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5 font-medium flex items-center gap-2">
+      {/* ✅ H2 equivalent heading for accessibility */}
+      <p
+        className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5 font-medium flex items-center gap-2"
+        role="heading"
+        aria-level={2}
+      >
         <Plus className="h-3.5 w-3.5 text-primary" />
         New Expense
       </p>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="text-xs text-muted-foreground mb-1.5 block font-medium">Title</label>
+          <label
+            htmlFor="expense-title"
+            className="text-xs text-muted-foreground mb-1.5 block font-medium"
+          >
+            Title
+          </label>
           <Input
+            id="expense-title"
             ref={titleRef}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -80,10 +92,16 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAdd }) => {
         </div>
 
         <div>
-          <label className="text-xs text-muted-foreground mb-1.5 block font-medium">Amount</label>
+          <label
+            htmlFor="expense-amount"
+            className="text-xs text-muted-foreground mb-1.5 block font-medium"
+          >
+            Amount
+          </label>
           <div className="relative">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-primary font-mono text-sm font-semibold">$</span>
             <Input
+              id="expense-amount"
               type="number"
               step="0.01"
               min="0"
@@ -96,8 +114,17 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAdd }) => {
         </div>
 
         <div>
-          <label className="text-xs text-muted-foreground mb-1.5 block font-medium">Category</label>
-          <Select value={category} onValueChange={setCategory}>
+          <label
+            htmlFor="expense-category"
+            className="text-xs text-muted-foreground mb-1.5 block font-medium"
+          >
+            Category
+          </label>
+          <Select
+            id="expense-category"
+            value={category}
+            onValueChange={setCategory}
+          >
             <SelectTrigger className="border-border/50 bg-secondary/50 h-11 rounded-xl">
               <SelectValue placeholder="Select category" />
             </SelectTrigger>
@@ -112,10 +139,16 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAdd }) => {
         </div>
 
         <div>
-          <label className="text-xs text-muted-foreground mb-1.5 block font-medium">Date</label>
+          <label
+            htmlFor="expense-date"
+            className="text-xs text-muted-foreground mb-1.5 block font-medium"
+          >
+            Date
+          </label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
+                id="expense-date"
                 variant="outline"
                 className={cn(
                   "w-full justify-start text-left font-normal h-11 border-border/50 bg-secondary/50 rounded-xl",
@@ -130,7 +163,10 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAdd }) => {
                 )}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 rounded-xl border-border/50" align="start">
+            <PopoverContent
+              className="w-auto p-0 rounded-xl border-border/50"
+              align="start"
+            >
               <Calendar
                 mode="single"
                 selected={date}
@@ -145,13 +181,16 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAdd }) => {
         <Button
           type="submit"
           className="w-full h-11 text-xs uppercase tracking-[0.15em] font-semibold mt-2 rounded-xl relative overflow-hidden group"
-          style={{ background: 'var(--gradient-primary)' }}
+          style={{ background: "var(--gradient-primary)" }}
         >
           <span className="relative z-10 flex items-center gap-2">
             <Plus className="h-4 w-4" />
             Add Expense
           </span>
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: 'var(--gradient-accent)' }} />
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
+            style={{ background: "var(--gradient-accent)" }}
+          />
         </Button>
       </form>
     </motion.div>
